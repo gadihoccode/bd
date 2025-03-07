@@ -1,0 +1,20 @@
+def Try(i,cur,comp):
+    global a,res
+    if cur > n:
+        return
+    if cur == n:
+        res = min(res,comp)
+    j = 1
+    while True:
+        comp *= a[i]
+        if comp > res:
+            break
+        Try(i + 1,cur*(j + 1),comp)
+        j += 1
+        
+n = int(input())
+a = [2,3,5,7,11,13,17,23,29,31]
+res = 10 ** 1000
+Try(0,1,1)
+print(res)
+
