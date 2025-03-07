@@ -1,0 +1,42 @@
+n,m = map(int,input().split())
+d,c = map(int,input().split())
+g ={i :[] for i in range(n + 1)}
+
+for i in range(m):
+    x,y,z = map(int,input().split())
+    g[x].append((y,z))
+    g[y].append((x,z))
+
+inf = float('inf')
+visited = [False] * (n + 1)
+pre = [-1] * (n + 1)
+f = [inf] * (n + 1)
+f[d] = 0
+v = 0
+while v != c:
+    v = 0
+    for i in range(1,n + 1):
+        if visited[i] == False and f[i] < f[v]:
+            v = i
+    if v == c or v == 0:
+        break
+    visited[v] = True
+    for i,j in g[v]:
+        if visited[i] == False and f[i] > f[v] + j:
+            f[i] = f[v] + j
+            pre[i] = v
+if f[c] != inf:
+    print(f[c])
+    d = []
+    i = c
+    while i != -1:
+        d.append(i)
+        i = pre[i]
+    d.reverse()
+    print(*d)
+else:
+    print(-1)
+
+        
+    
+    
