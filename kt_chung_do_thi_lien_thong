@@ -1,0 +1,36 @@
+def make_set(v):
+    parent[v] = v
+    sz[v] = 1
+
+def find_set(v):
+    if v == parent[v]:
+        return v
+    else:
+        parent[v] = find_set(parent[v])
+        return parent[v]
+
+def union_set(a,b):
+    a = find_set(a)
+    b = find_set(b)
+    if a != b:
+        if sz[a] < sz[b]:
+            a,b = b,a
+        parent[b] = a
+        sz[a] += sz[b]
+
+n,m = map(int,input().split())
+parent = [0] * (n + 1)
+sz = [0] * (n + 1)
+for i in range(1,n + 1):
+    make_set(i)
+    
+for i in range(m):
+    x,y = map(int,input().split())
+    union_set(x,y)
+q = int(input())
+for i in range(q):
+    x,y = map(int,input().split())
+    if parent[x] == parent[y]:
+        print('YES')
+    else:
+        print('NO')
