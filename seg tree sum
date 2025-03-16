@@ -1,0 +1,42 @@
+def build(ID, l, r):
+    if l == r:
+        st[ID] = a[l]
+        return
+    
+    mid = (l + r) // 2
+    build(2 * ID, l, mid)
+    build(2 * ID + 1, mid + 1,r)
+    st[ID] = st[2 * ID] + st[2 * ID + 1]
+    
+def update(ID, l, r, i, val):
+    if i < l or i > r:
+        return
+    if l == r:
+        st[ID] = val
+        return
+    mid = (l + r) // 2
+    update(2 * ID, l, mid, i, val)
+    update(2 * ID + 1, mid + 1, r, i, val)
+    st[ID] = st[2 * ID] + st[2 * ID + 1]
+
+def get(ID, l, r, u, v):
+    if v < l or r < u:
+        return 0
+    if l >= u and r <= v:
+        return st[ID]
+    
+    mid = (l + r) // 2
+    get1 = get(2 * ID, l, mid, u, v)
+    get2 = get(2 * ID + 1, mid + 1, r, u, v)
+    return get1 + get2
+
+n = int(input())
+a = [0] + list(map(int, input().split()))
+st = [0] * (4 * n + 1)
+build(1, 1, n)
+for i in range(int(input())):
+    x,y,z = map(str,input().split())
+    if x == 'update':
+        update(1, 1, n, int(y), int(z))
+    else:
+        print(get(1, 1, n, int(y), int(z)))
