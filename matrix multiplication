@@ -1,0 +1,17 @@
+MOD = 10 ** 9 + 7
+def matrix_pow(a, b):
+    return [[(a[0][0] * b[0][0] + a[1][0] * b[0][1]) % MOD , (a[0][1] * b[0][0] + a[1][1] * b[0][1]) % MOD],
+            [(a[0][0] * b[1][0] + a[1][0] * b[1][1]) % MOD, (a[0][1] * b[1][0] + a[1][1] * b[1][1]) % MOD ]]
+for _ in range(int(input())):
+    n = int(input())
+    base_matrix = [[1,1],
+                   [1,0]]
+    result = [[1,0],
+              [0,1]]
+
+    while n > 0:
+        if n % 2 == 1:
+            result = matrix_pow(result, base_matrix)
+        base_matrix = matrix_pow(base_matrix, base_matrix)
+        n //= 2
+    print(result[0][1])
