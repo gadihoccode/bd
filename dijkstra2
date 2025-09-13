@@ -1,0 +1,28 @@
+n, m, s, e = map(int, input().split())
+g = [[] for i in range(n + 1)]
+for i in range(m):
+    x, y, z = map(int, input().split())
+    g[x].append((y,z))
+    g[y].append((x,z))
+
+d = [float('inf')] * (n + 1)
+trace = [-1] * (n + 1)
+d[s] = 0
+p = [False] * (n + 1)
+for i in range(1, n + 1):
+    uBest = 0
+    MAX = float('inf')
+    for u in range(1, n + 1):
+        if (d[u] < MAX) and (p[u] == False):
+            uBest = u
+            MAX = d[u]
+    u = uBest
+    if u == 0:
+        break
+    p[u] = True
+    for v, w in g[u]:
+        if d[v] > d[u] + w:
+            d[v] = d[u] + w
+            trace[v] = u
+for i in range(1, n + 1):
+    print(-1 if d[i] == float('inf') else d[i], end=" ")
