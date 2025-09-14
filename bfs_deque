@@ -1,0 +1,23 @@
+from collections import deque
+def bfs(i):
+    queue = deque([i])
+    visisted[i] = True
+    while len(queue) != 0:
+        u = queue.popleft()
+        for v in g[u]:
+            if visisted[v] == False:
+                queue.append(v)
+                dist[v] = dist[u] + 1
+                visisted[v] = True
+
+n, m, s, t = map(int, input().split())
+g = [[] for i  in range(n + 1)]
+for i in range(m):
+    x, y = map(int, input().split())
+    g[x].append(y)
+    g[y].append(x)
+
+dist = [0] * (n + 1)
+visisted = [False] * (n  + 1)
+bfs(s)
+print(dist[t])
