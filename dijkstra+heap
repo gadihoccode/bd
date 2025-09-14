@@ -1,0 +1,36 @@
+from heapq import heappop, heappush
+n, m, s, e = map(int, input().split())
+g = [[] for i in range(n + 1)]
+for i in range(m):
+    x, y, z = map(int, input().split())
+    g[x].append((y,z))
+    g[y].append((x,z))
+
+d = [float('inf')] * (n + 1)
+trace = [-1] * (n + 1)
+d[s] = 0
+pq = [(0,s)]
+
+for i in range(1, n + 1):
+    du, u = heappop(pq)
+    if du != d[u]:
+        continue
+    if u == 0:
+        break
+    if u == e:
+        break
+    for v, w in g[u]:
+        if d[v] > d[u] + w:
+            d[v] = d[u] + w
+            trace[v] = u
+            heappush(pq, (d[v], v))
+if d[e] == float('inf'):
+    print(-1)
+else:
+    print(d[e])
+    i = e
+    path = []
+    while i != -1:
+        path.append(i)
+        i = trace[i]
+    print(*path[::-1])
