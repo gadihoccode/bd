@@ -1,0 +1,21 @@
+BASE = 256
+MOD = 10**9 + 2277
+n, k = map(int, input().split())
+s = [''] * (n + 1)
+for i in range(n):
+    s[i] = input()
+
+pw = [1] * (k + 1)
+for i in range(k + 1):
+    pw[i] = pw[i - 1] * BASE % MOD
+hs = [0] * (n + 1)
+for i in range(n):
+    for j in range(k):
+        hs[i] += ord(s[i][j]) * pw[j] % MOD
+
+res = 0
+for i in range(n):
+    for j in range(i + 1, n):
+        if hs[i] == hs[j]:
+            res += 1
+print(res)
