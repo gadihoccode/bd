@@ -1,0 +1,36 @@
+BASE = 256
+MOD = 10 ** 9 + 2277
+
+def getHash(i):
+    tmp = hs[i + k - 2] - hs[i - 1]
+    if tmp < 0:
+        tmp += MOD
+    return tmp  * invPw[i - 1] % MOD
+
+s = ' ' + input()
+p = ' ' + input()
+n = len(s)
+k = len(p)
+
+pw = [1] * (n + 1)
+invPw = [1] * (n + 1)
+invBase = pow(BASE, MOD - 2, MOD)
+
+for i in range(1, n + 1):
+    pw[i] = pw[i - 1] * BASE % MOD
+    invPw[i] = invPw[i - 1] * invBase % MOD
+
+hs = [0] * (n + 1)
+for i in range(1, n):
+    hs[i] = (hs[i - 1] + ord(s[i]) *  pw[i - 1]) % MOD
+
+hr = 0
+for i in range(1, k):
+    hr = (hr + ord(p[i]) * pw[i - 1]) % MOD
+
+#print(hr)
+
+for i in range(1, n - k + 2):
+    #print(getHash(i))
+    if getHash(i) == hr:
+        print(i, end = ' ')
