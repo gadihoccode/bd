@@ -1,0 +1,45 @@
+def dfs(u):
+    global cnt, num, low
+    cnt += 1
+    low[u] = n + 1
+    num[u] = cnt
+    for i in g[u]:
+        if used[i] == False:
+            used[i] = True
+            v = canh[i][0] + canh[i][1] - u
+            
+            if num[v] == 0:
+                child[u] += 1
+                dfs(v)
+                low[u] = min(low[u], low[v])
+                if low[v] > num[u]:
+                    bridge[i] = True
+                if low[v] >= num[u]:
+                    khop[u] = True
+            else:
+                low[u] = min(low[u], num[v])
+
+n, m = map(int, input().split())
+canh = [None] * (m + 1)
+g = [[] for i in range(n + 1)]
+for i in range(1, m + 1):
+    x, y = map(int, input().split())
+    canh[i] = (x, y)
+    g[x].append(i)
+    g[y].append(i)
+
+bridge = [False] * (m + 1)
+num = [0] * (n + 1)
+low = [0] * (n + 1)
+child = [0] * (n + 1)
+khop =  [False] * (n + 1)
+cnt = 0
+used = [False] * (m + 1)
+for i in range(1, n + 1):
+    if num[i] == 0:
+        dfs(i)
+        if child[i] < 2:
+            khop[i] = False
+
+print(sum([1 for i in range(1, n + 1) if khop[i]]), end = ' ')
+print(sum([1 for i in range(1, m + 1) if bridge[i]]))
