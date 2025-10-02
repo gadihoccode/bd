@@ -1,0 +1,30 @@
+from heapq import heappop, heappush
+n, m = map(int, input().split())
+g = [[] for i in range(n + 1)]
+for i in range(m):
+    x, y, z, t = map(int, input().split())
+    g[y].append((z, t))
+    if x == 2:
+        g[z].append((y, t))
+
+dist = [float('inf')] * (n + 1)
+cnt = [0] * (n + 1)
+trace = [0] * (n + 1)
+dist[1] = 0
+cnt[1] = 1
+pq = [(0, 1)]
+while pq:
+    du, u = heappop(pq)
+    if du > dist[u]:
+        continue
+
+    for v, w in g[u]:
+        tmp = dist[u] + w
+        if dist[v] > tmp:
+            dist[v] = tmp
+            cnt[v] = cnt[u]
+            heappush(pq, (dist[v], v))
+        elif dist[v] == tmp:
+            cnt[v] += cnt[u]
+
+print(dist[n], cnt[n])
