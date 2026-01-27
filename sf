@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo tường lớp 12/2</title>
+    <style>
+        .mess{
+            text-align: center;
+        }
+    </style>
+    <link  rel="stylesheet"  href="Bai12.css"> 
+</head>
+<body>
+    <div id = "vien">
+        <h1>Báo tường điện tử</h1>
+        <p>Báo tường của lớp 12/2 kỉ niệm ngày ra trường</p>
+    </div>
+    <div id = "boder_">
+        <h3>Thơ: Gửi lại Phượng Hồng</h3>
+        <p><i>Gửi lại thầy cô bài giảng dở dang<br>
+            Gửi lại hàng cây, ghế đá, sân trường<br>
+            12/2 ơi, mai này muôn lối<br>
+            Vẫn nhớ về nhau, nhớ một thuở yêu thương.
+        </i></p>
+    </div>
+    <div id ="boder_">
+        <h3>Lời nhắn gửi</h3>
+        <ul>
+            <li>Chúc cả lớp đỗ nguyện vòng 1!</li>
+            <li>Đừng quên hợp lớp mỗi năm nhé.</li>
+            <li>Cảm ơn thanh xuân có các bạn.</li>
+        </ul>
+    </div>
+    <span>
+        <div id = "boder_anh">
+            <h3>Góc ảnh</h3>
+            <img src = "B12_1.jpg">
+            <img src = "B12_2.jpg"><br>
+            <img src = "B12_3.jpg">
+            <img src = "B12_4.jpg">
+        </div>
+        <div id = "video_boder">
+            <h3>Video</h3>
+            <video src = "video.mp4" controls width="300" height="300"></video>
+        </div>
+        
+    </span>
+    <div id = "boder_">
+        <h3>Bình luận</h3>
+        <form>
+            Email:<input type="text"><br>
+            Bình luận:<input type="text">
+        </form>
+    </div>
+    <div id ="conect">
+        <p>2025 Nhóm 4 - Lớp 12/2</p>
+        <p>Email: nhom122@gmail.com</p>
+        <p>Ngày cập nhật cuối 15/6/2026</p>
+        <p>Trang web có sử dụng hình ảnh từ Internet</p>
+    </div>
+</body>
+</html>
